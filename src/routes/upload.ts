@@ -39,7 +39,7 @@ export default function(mongo: Mongo, directory: string, codec: crypto.EncodingS
         const encrypted = crypto.aes.encrypt(req.body, result.key, iv)
 
         try {
-            await fs.writeFile(`${__dirname}/files/${name}.${req.query.extension}.blob`, encrypted, "utf8")
+            await fs.writeFile(`${path.resolve(`./files/${name}.${req.query.extension}.blob`)}`, encrypted, "utf8")
             await mongo.insertOne({
                 user: result.username,
                 name: name,
